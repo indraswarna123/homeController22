@@ -1,7 +1,9 @@
 package id.ac.sgu.homecontroller;
 
 public class Controller {
+	
 	public static void main(String[] args) {
+
 		Behaviour ACBehaviour = new BlowingWind();
 		Behaviour BlindsBehaviour = new BlindsSound();
 		Behaviour LampBehaviour = new LampSound();
@@ -27,5 +29,13 @@ public class Controller {
 		time.addObserver(timeObserver);
 		time.addObserver(lampObserver);
 		time.setTime(0000);
+
+//		Sensor themTest = new Thermometer();
+//		Sensor barTest = new Barometer();
+//		themTest.doubledValue();
+//		barTest.doubledValue();
+//		UserGUI ug = new UserGUI();
+//		ug.frameInit();
+
 	}
 }
