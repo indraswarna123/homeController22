@@ -7,5 +7,7 @@ public class Controller {
 		Sensor barTest = new Barometer();
 		themTest.doubledValue();
 		barTest.doubledValue();
+		UserGUI ug = new UserGUI();
+		ug.frameInit();
 	}
 }
