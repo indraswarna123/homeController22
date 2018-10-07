@@ -1,8 +1,10 @@
 package id.ac.sgu.homecontroller;
 
+import java.io.IOException;
+
 public class Controller {
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 
 		Behaviour ACBehaviour = new BlowingWind();
 		Behaviour BlindsBehaviour = new BlindsSound();
@@ -34,8 +36,10 @@ public class Controller {
 //		Sensor barTest = new Barometer();
 //		themTest.doubledValue();
 //		barTest.doubledValue();
-//		UserGUI ug = new UserGUI();
-//		ug.frameInit();
+		UserGUI ug = new UserGUI();
+		ug.frameInit();
 
 	}
+	
+	//public void getValueFrom
 }
