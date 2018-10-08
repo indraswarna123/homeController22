@@ -1,9 +1,11 @@
 package id.ac.sgu.homecontroller;
+import java.time.LocalTime;
+import java.util.*;
 
 public class Controller {
 	
 	public static void main(String[] args) {
-
+		
 		Behaviour ACBehaviour = new BlowingWind();
 		Behaviour BlindsBehaviour = new BlindsSound();
 		Behaviour LampBehaviour = new LampSound();
@@ -24,11 +26,45 @@ public class Controller {
 		LampObserver lampObserver = new LampObserver(remoteLamps);
 		
 		temperature.addObserver(temperatureObserver);
-		temperature.setTemperature(30);
+		
 		
 		time.addObserver(timeObserver);
 		time.addObserver(lampObserver);
-		time.setTime(0000);
+		
+		
+	    
+	    
+	    TimeParser parser = new TimeParser();
+	    
+
+		Random rand = new Random();
+		int[] temp = new int[]{18,26};
+		ArrayList<LocalTime> timeList = new ArrayList<LocalTime>();
+		timeList.add(parser.parser("07:00"));
+		timeList.add(parser.parser("18:59"));
+		
+		
+		Thread thread = new Thread(){
+		    public void run(){
+		      try {
+		          while(true){
+		        	 
+		        	 time.setTime(timeList.get(rand.nextInt(timeList.size())));
+		        	 temperature.setTemperature(temp[rand.nextInt(temp.length)]);
+//		        	 System.out.println(timeList.get(rand.nextInt(timeList.size())));
+		             // Let the thread sleep for a while.
+		             Thread.sleep(10000);
+		          }
+		       } catch (InterruptedException e) {
+		          System.out.println("Closed.");
+		       }
+		    }
+		  };
+		
+		thread.start();
+		
+		 
+		
 
 //		Sensor themTest = new Thermometer();
 //		Sensor barTest = new Barometer();
