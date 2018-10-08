@@ -95,9 +95,11 @@ class Temperature extends Observable{
 
 class ACTimeObserver implements Observer {
 	mainController controller;
+	Temperature temp;
 	DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_LOCAL_TIME;
-	public ACTimeObserver(mainController controller) {
+	public ACTimeObserver(mainController controller,Temperature temp) {
 		this.controller = controller;
+		this.temp = temp;
 	}
 	
 	@Override
@@ -115,49 +117,56 @@ class ACTimeObserver implements Observer {
 		LocalTime parsedTime12 = LocalTime.parse(time1200, dateTimeFormatter);		
 		LocalTime parsedTime24 = LocalTime.parse(time2400, dateTimeFormatter);
 		
-		if(this.controller.getStatus() == 1) {
+		System.out.println(this.temp.temperature);
+		if(this.temp.temperature>15) {
+			if(this.controller.getStatus() == 1) {
+				if(((LocalTime) temp).isAfter(parsedTime12) && ((LocalTime) temp).isBefore(parsedTime24)){
+					if(((LocalTime) temp).isAfter(parsedTimeOn)) {
+						this.controller.setStatus(0);
+						this.controller.actor.turnOn();
+					}else {
+						this.controller.setStatus(1);
+						this.controller.actor.turnOff();
+					}
+				}else if(((LocalTime) temp).isAfter(parsedTime00) && ((LocalTime) temp).isBefore(parsedTime12)){
+					if(((LocalTime) temp).isAfter(parsedTimeOff)) {
+						this.controller.setStatus(1);
+						this.controller.actor.turnOff();
+					}else {
+						this.controller.setStatus(0);
+						this.controller.actor.turnOn();
+					}
+				}
+			}else {
+				this.controller.setStatus(0);
+			}
+			
 			if(((LocalTime) temp).isAfter(parsedTime12) && ((LocalTime) temp).isBefore(parsedTime24)){
 				if(((LocalTime) temp).isAfter(parsedTimeOn)) {
-					this.controller.setStatus(0);
+					this.controller.actor.setStatus(1);
 					this.controller.actor.turnOn();
+					
 				}else {
-					this.controller.setStatus(1);
+					this.controller.actor.setStatus(0);
 					this.controller.actor.turnOff();
 				}
 			}else if(((LocalTime) temp).isAfter(parsedTime00) && ((LocalTime) temp).isBefore(parsedTime12)){
 				if(((LocalTime) temp).isAfter(parsedTimeOff)) {
-					this.controller.setStatus(1);
+					this.controller.actor.setStatus(0);
 					this.controller.actor.turnOff();
 				}else {
-					this.controller.setStatus(0);
+					this.controller.actor.setStatus(1);
 					this.controller.actor.turnOn();
 				}
 			}
+			
+			
 		}else {
-			this.controller.setStatus(0);
+			this.controller.actor.setStatus(0);
+			this.controller.actor.turnOff();
+		}
 		}
 		
-		if(((LocalTime) temp).isAfter(parsedTime12) && ((LocalTime) temp).isBefore(parsedTime24)){
-			if(((LocalTime) temp).isAfter(parsedTimeOn)) {
-				this.controller.actor.setStatus(1);
-				this.controller.actor.turnOn();
-				
-			}else {
-				this.controller.actor.setStatus(0);
-				this.controller.actor.turnOff();
-			}
-		}else if(((LocalTime) temp).isAfter(parsedTime00) && ((LocalTime) temp).isBefore(parsedTime12)){
-			if(((LocalTime) temp).isAfter(parsedTimeOff)) {
-				this.controller.actor.setStatus(0);
-				this.controller.actor.turnOff();
-			}else {
-				this.controller.actor.setStatus(1);
-				this.controller.actor.turnOn();
-			}
-		}
-		
-		
-	}
 	
 }
 

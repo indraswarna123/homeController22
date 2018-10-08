@@ -37,12 +37,12 @@ public class Controller {
 		TemperatureObserver temperatureObserver = new TemperatureObserver(remoteAC);
 		
 		Time time = new Time();
-		TimeObserver timeObserver = new TimeObserver(remoteBlinds);
-		ACTimeObserver acTimeObserver = new ACTimeObserver(remoteAC);
-		LampObserver lampObserver = new LampObserver(remoteLamps);
-		
+			
 		temperature.addObserver(temperatureObserver);
-		
+	
+		TimeObserver timeObserver = new TimeObserver(remoteBlinds);
+		ACTimeObserver acTimeObserver = new ACTimeObserver(remoteAC,temperature);
+		LampObserver lampObserver = new LampObserver(remoteLamps);
 		
 		time.addObserver(timeObserver);
 		time.addObserver(lampObserver);
@@ -50,39 +50,6 @@ public class Controller {
 		
 	    
 	    TimeParser parser = new TimeParser();
-	    
-
-		Random rand = new Random();
-		int[] temp = new int[]{18,26};
-		ArrayList<LocalTime> timeList = new ArrayList<LocalTime>();
-		timeList.add(parser.parser("05:00"));
-		timeList.add(parser.parser("19:59"));
-
-//		Thread thread = new Thread(){
-//		    public void run(){
-//		      try {
-//		          while(true){
-//		        	 LocalTime temporaryTime = timeList.get(rand.nextInt(timeList.size()));
-//		        	 int temporaryTemp = temp[rand.nextInt(temp.length)];
-//		        	 
-//		        	 temperature.setTemperature(temporaryTemp);
-//		        	 time.setTime(temporaryTime);
-//		        	 
-//		        	 System.out.println("Current Time : "+temporaryTime);
-//		        	 System.out.println("Current Temperature : "+temporaryTemp);
-//		             // Let the thread sleep for a while.
-//		             Thread.sleep(10000);
-//		          }
-//		       } catch (InterruptedException e) {
-//		          System.out.println("Closed.");
-//		       }
-//		    }
-//		  };
-//		
-//		thread.start();
-		
-
-	
 		
 		UserGUI ug = new UserGUI();
 		JPanel panel = new ViewerPanel(remoteAC,remoteBlinds,remoteLamps,time,temperature);
