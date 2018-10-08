@@ -5,17 +5,76 @@
  */
 package id.ac.sgu.homecontroller;
 
+import java.awt.event.ActionEvent;
+
 /**
  *
  * @author Ryandy
  */
 public class ViewerGUIPanel extends javax.swing.JPanel {
+	private double tempOutDouble;
+	private double windPressureDouble = 100;
+	private String imageChooserName;
+	 // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton blindButton;
+    private javax.swing.JLabel blindLabel;
+    private javax.swing.JPanel controlPanel;
+    private java.awt.Choice countryChoice;
+    private javax.swing.JLabel descLabel;
+    private javax.swing.JPanel iconPanel;
+    private javax.swing.JLabel imageLabel;
+    private javax.swing.JPanel informationPanel;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel setTemperatureLabel;
+    private javax.swing.JLabel setTurnOnAcTimeLabel;
+    private javax.swing.JLabel setTurnOnAcTimeLabel1;
+    private javax.swing.JLabel tempOutsideLabel;
+    private javax.swing.JLabel tempOutsideValueLabel;
+    private javax.swing.JSpinner tempSpinner;
+    private javax.swing.JTextField turnOffAcTimeTextField;
+    private javax.swing.JTextField turnOnAcTimeTextField;
+    private javax.swing.JLabel windPressureLabel;
+    private javax.swing.JLabel windPressureValueLabel;
+    // End of variables declaration//GEN-END:variables
+	
+	public double getTempOutDouble() {
+		return tempOutDouble;
+	}
 
+	public void setTempOutDouble(double tempOutDouble) {
+		
+		this.tempOutDouble = tempOutDouble;
+	}
+
+	public double getWindPressureDouble() {
+		
+		return windPressureDouble;
+	}
+
+	public void setWindPressureDouble(double windPressureDouble) {
+		
+		this.windPressureDouble = windPressureDouble;
+	}
+
+	public String getImageChooserName() {
+		return imageChooserName;
+	}
+
+	public void setImageChooserName(String imageChooserName) {
+		this.imageChooserName = imageChooserName;
+	}
+	
     /**
      * Creates new form ViewerGUI
      */
     public ViewerGUIPanel() {
         initComponents();
+    }
+    
+    public void refreshView() {
+    	tempOutsideValueLabel.setText(tempOutDouble+" C");
+    	windPressureValueLabel.setText(windPressureDouble+" ");
+    	
     }
 
     /**
@@ -46,9 +105,10 @@ public class ViewerGUIPanel extends javax.swing.JPanel {
         turnOffAcTimeTextField = new javax.swing.JTextField();
         countryChoice = new java.awt.Choice();
         descLabel = new javax.swing.JLabel();
-
+        refreshView(); //for updating viewer
+        
         iconPanel.setPreferredSize(new java.awt.Dimension(310, 210));
-
+        
         imageLabel.setText("IMAGE");
 
         javax.swing.GroupLayout iconPanelLayout = new javax.swing.GroupLayout(iconPanel);
@@ -76,7 +136,7 @@ public class ViewerGUIPanel extends javax.swing.JPanel {
         windPressureValueLabel.setText("30 kph");
 
         tempOutsideValueLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        tempOutsideValueLabel.setText("15");
+        tempOutsideValueLabel.setText(getTempOutDouble()+" C");
 
         javax.swing.GroupLayout informationPanelLayout = new javax.swing.GroupLayout(informationPanel);
         informationPanel.setLayout(informationPanelLayout);
@@ -152,6 +212,8 @@ public class ViewerGUIPanel extends javax.swing.JPanel {
             }
         });
 
+        
+       
         descLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         descLabel.setText("BRING UMBRELLA");
 
@@ -241,34 +303,23 @@ public class ViewerGUIPanel extends javax.swing.JPanel {
         iconPanel.getAccessibleContext().setAccessibleName("");
     }// </editor-fold>//GEN-END:initComponents
 
+    
     private void turnOnAcTimeTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_turnOnAcTimeTextFieldActionPerformed
         // TODO add your handling code here:
+    	System.out.println("TEST ");
+    	Sensor barTest = new Barometer();
+    	double test = barTest.doubledValue();
+    	windPressureValueLabel.setText(test+"");
+    	System.out.println(test+"<- dari mana aja");
+    	tempOutsideValueLabel.setText(1000+" C ");
     }//GEN-LAST:event_turnOnAcTimeTextFieldActionPerformed
+    
+    
 
     private void turnOffAcTimeTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_turnOffAcTimeTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_turnOffAcTimeTextFieldActionPerformed
 
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton blindButton;
-    private javax.swing.JLabel blindLabel;
-    private javax.swing.JPanel controlPanel;
-    private java.awt.Choice countryChoice;
-    private javax.swing.JLabel descLabel;
-    private javax.swing.JPanel iconPanel;
-    private javax.swing.JLabel imageLabel;
-    private javax.swing.JPanel informationPanel;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel setTemperatureLabel;
-    private javax.swing.JLabel setTurnOnAcTimeLabel;
-    private javax.swing.JLabel setTurnOnAcTimeLabel1;
-    private javax.swing.JLabel tempOutsideLabel;
-    private javax.swing.JLabel tempOutsideValueLabel;
-    private javax.swing.JSpinner tempSpinner;
-    private javax.swing.JTextField turnOffAcTimeTextField;
-    private javax.swing.JTextField turnOnAcTimeTextField;
-    private javax.swing.JLabel windPressureLabel;
-    private javax.swing.JLabel windPressureValueLabel;
-    // End of variables declaration//GEN-END:variables
+   
 }

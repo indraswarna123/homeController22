@@ -32,10 +32,10 @@ public class Controller {
 		time.addObserver(lampObserver);
 		time.setTime(0000);
 
-//		Sensor themTest = new Thermometer();
-//		Sensor barTest = new Barometer();
-//		themTest.doubledValue();
-//		barTest.doubledValue();
+		ViewerGUIPanel vgp = new ViewerGUIPanel();
+		
+		vgp.setTempOutDouble(0);
+		
 		UserGUI ug = new UserGUI();
 		ug.frameInit();
 

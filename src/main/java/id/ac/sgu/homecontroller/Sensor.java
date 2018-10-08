@@ -1,5 +1,7 @@
 package id.ac.sgu.homecontroller;
 
+import java.util.Observer;
+
 import com.github.dvdme.ForecastIOLib.FIOMinutely;
 import com.github.dvdme.ForecastIOLib.ForecastIO;
 import com.google.gson.Gson;
@@ -16,7 +18,7 @@ class RealFeel{
 	double dewPoint= 0;
 	double humidity= 0;
 	double pressure= 0;
-	double windspeed= 0;
+	double windSpeed= 0;
 	double windGust= 0;
 	double windBearing= 0;
 	double cloudCover= 0;
@@ -40,12 +42,23 @@ public abstract class Sensor {
 	
 	RealFeel rf;
 	
+	ViewerGUIPanel vgp = new ViewerGUIPanel();
+	
 	public void refresh() {
 		fio.setUnits(ForecastIO.UNITS_SI);
 		fio.setLang(ForecastIO.LANG_ENGLISH);
-		//System.out.println("Temperature :  "+fio.getCurrently());
+		System.out.println("inside Sensor Temperature :  "+fio.getCurrently());
 		String parse = fio.getCurrently()+"";
 		this.rf = gson.fromJson(parse, RealFeel.class);
+		vgp.setTempOutDouble(rf.temperature);
+		vgp.setWindPressureDouble(rf.pressure);
+		
+	}
+	
+	public String getSummary() {
+		refresh();
+		System.out.println(rf.summary);
+		return rf.summary;
 	}
 	
 	abstract double doubledValue();

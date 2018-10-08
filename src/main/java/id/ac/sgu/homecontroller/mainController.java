@@ -10,6 +10,31 @@ public class mainController{
 		this.behaviour = behaviour;
 	}
 	
+	public mainController(){
+		
+	}
+	
+	public String returnImage(String summary) {
+		String summaryReturn = "QuestionMark.png";
+		if(summary.matches(".*Cloudy.*")) {
+			if(summary.matches(".*Partly.*")) {
+				summaryReturn = "Weather_Sun_Cloudy.png";
+			}else if(summary.matches(".*Storm.*")) {
+				summaryReturn = "Weater_RainyStorm.png";
+			}else if(summary.matches(".*Rainy.*")) {
+				summaryReturn = "Weather_Rainy.png";
+			}else {
+				summaryReturn = "Weather_Cloudy.png";
+			}
+		}else if(summary.matches(".*Sun.*")){
+			summaryReturn = "Weather_Sun.png";
+		}else {
+			summaryReturn = "QuestionMark.png";
+		}
+		
+		return summaryReturn;
+	}
+	
 	
 }
 

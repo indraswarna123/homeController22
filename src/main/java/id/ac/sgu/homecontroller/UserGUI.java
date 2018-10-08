@@ -19,7 +19,7 @@ import javax.swing.JTextField;
 
 public class UserGUI {
 	
-	JPanel panel = new ViewerGUIPanel();
+	JPanel panel = new ViewerPanel();
 	ImageIcon iconWeather;
 	
 	public void frameInit() throws IOException {
@@ -31,7 +31,7 @@ public class UserGUI {
 		//create components and put them in the frame
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
 		//size the frame
-		frame.setSize(1000, 500);
+		frame.setSize(1500, 600);
 		//show 
 		frame.setVisible(true);
 	}
