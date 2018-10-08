@@ -12,12 +12,22 @@ import java.awt.SecondaryLoop;
  * @author Ryandy
  */
 public class ViewerPanel extends javax.swing.JPanel {
-
+	mainController controllerAC;
+	mainController controllerBlinds;
+	mainController controllerLamps;
+	Time timeObservator;
+	Temperature temperatureObservator;
+	TimeParser parser = new TimeParser();
     /**
      * Creates new form ViewerPanel
      */
-    public ViewerPanel() {
-        initComponents();
+    public ViewerPanel(mainController controllerAC,mainController controllerBlinds,mainController controllerLamps,Time time,Temperature temperature) {
+    	this.controllerAC = controllerAC;
+        this.controllerBlinds = controllerBlinds;
+        this.controllerLamps = controllerLamps;
+        this.timeObservator = time;
+        this.temperatureObservator = temperature;
+    	initComponents();
     }
 
     /**
@@ -28,7 +38,7 @@ public class ViewerPanel extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
+    	System.out.println(controllerAC.getStatus());
         imagePanel = new javax.swing.JPanel();
         imageLabel = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -81,7 +91,7 @@ public class ViewerPanel extends javax.swing.JPanel {
 
         imagePanel.setPreferredSize(new java.awt.Dimension(350, 250));
 
-        imageLabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\ryand\\oxygen\\eclipse-workspace\\homeController22\\Image\\Weather\\QuestionMark.png")); // NOI18N
+        imageLabel.setIcon(new javax.swing.ImageIcon("./Image/Weather/QuestionMark.png")); // NOI18N
 
         javax.swing.GroupLayout imagePanelLayout = new javax.swing.GroupLayout(imagePanel);
         imagePanel.setLayout(imagePanelLayout);
@@ -112,7 +122,7 @@ public class ViewerPanel extends javax.swing.JPanel {
         tempOutsideValueLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tempOutsideValueLabel.setText(".");
 
-        refreshButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\ryand\\oxygen\\eclipse-workspace\\homeController22\\Image\\Etc\\RefreshButton.png")); // NOI18N
+        refreshButton.setIcon(new javax.swing.ImageIcon("./Image/Etc/RefreshButton.png")); // NOI18N
         refreshButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 refreshButtonActionPerformed(evt);
@@ -125,7 +135,11 @@ public class ViewerPanel extends javax.swing.JPanel {
         acIndicatorLabel.setText("AC INDICATOR         :");
 
         acIndicatorValueLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        acIndicatorValueLabel.setText(".");
+        if(this.controllerAC.getStatus() == 1) {
+        	acIndicatorValueLabel.setText("On");
+		}else {
+			acIndicatorValueLabel.setText("Off");
+		}
 
         descriptionTopLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         descriptionTopLabel.setText("Description");
@@ -138,13 +152,22 @@ public class ViewerPanel extends javax.swing.JPanel {
         lampIndicatorLabel.setText("LAMP INDICATOR     :");
 
         lampIndicatorValueLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lampIndicatorValueLabel.setText(".");
+        if(this.controllerLamps.getStatus() == 1) {
+        	lampIndicatorValueLabel.setText("On");
+		}else {
+			lampIndicatorValueLabel.setText("Off");
+		}
 
         blindIndicatorLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         blindIndicatorLabel.setText("BLIND INDICATOR    :");
 
         blindIndicatorValueLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        blindIndicatorValueLabel.setText(".");
+        
+        if(this.controllerBlinds.getStatus() == 1) {
+			blindIndicatorValueLabel.setText("On");
+		}else {
+			blindIndicatorValueLabel.setText("Off");
+		}
 
         roomTemperature.setFont(new java.awt.Font("Tahoma", 0, 40)); // NOI18N
         roomTemperature.setText("0 C");
@@ -243,7 +266,7 @@ public class ViewerPanel extends javax.swing.JPanel {
         });
 
         blindButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        blindButton.setText("OPEN");
+        blindButton.setText("Turn On");
         blindButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 blindButtonActionPerformed(evt);
@@ -541,41 +564,102 @@ public class ViewerPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_refreshButtonActionPerformed
 
     private void submitLampTimerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitLampTimerButtonActionPerformed
-        // TODO add your handling code here:
+    	String time = this.lampTimerText.getText();
+    	this.timeObservator.setTime(parser.parser(time));
+    	if(this.controllerAC.getStatus() == 1) {
+    		this.controllerAC.setStatus(0);
+    		acIndicatorValueLabel.setText("On");
+    		acButton.setText("Turn Off");
+    	}else {
+    		this.controllerAC.setStatus(1);
+    		acIndicatorValueLabel.setText("Off");
+    		acButton.setText("Turn On");
+    	}
+//    	if(blindButton.getText().equals("OPEN")) { //if open do something here
+//    		this.controllerBlinds.setStatus(1);
+//    		if(this.controllerBlinds.getStatus() == 1) {
+//    			blindIndicatorValueLabel.setText("On");
+//    		}else {
+//    			blindIndicatorValueLabel.setText("Off");
+//    		}
+//    		blindButton.setText("CLOSE");
+//    	}else if(blindButton.getText().equals("CLOSE")){
+//    		if(this.controllerBlinds.getStatus() == 0) {
+//    			blindIndicatorValueLabel.setText("On");
+//    		}else {
+//    			blindIndicatorValueLabel.setText("Off");
+//    		}
+//    		blindButton.setText("OPEN"); //if close do something here
+//    	}
+    	if(this.controllerBlinds.getStatus() == 1) {
+    		this.controllerBlinds.setStatus(0);
+    		blindIndicatorValueLabel.setText("On");
+    		blindButton.setText("Turn Off");
+    	}else {
+    		this.controllerBlinds.setStatus(1);
+    		blindIndicatorValueLabel.setText("Off");
+    		blindButton.setText("Turn On");
+    	}
+    	if(this.controllerLamps.getStatus() == 1) {
+    		this.controllerLamps.setStatus(0);
+    		lampIndicatorValueLabel.setText("On");
+    		lampButton.setText("Turn Off");
+    	}else {
+    		this.controllerLamps.setStatus(1);
+    		lampIndicatorValueLabel.setText("Off");
+    		lampButton.setText("Turn On");
+    	}
+    	
     }//GEN-LAST:event_submitLampTimerButtonActionPerformed
 
     private void clearACTimeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearACTimeButtonActionPerformed
-        // TODO add your handling code here:
+        this.turnOnAcTimeText.setText("");
+        this.turnOffAcTimeText.setText("");
+        
     }//GEN-LAST:event_clearACTimeButtonActionPerformed
 
     private void submitAcTimeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitAcTimeButtonActionPerformed
-        // TODO add your handling code here:
+        String onTime = this.turnOnAcTimeText.getText();
+        String offTime = this.turnOffAcTimeText.getText();
+        this.controllerAC.setTimerOn(onTime);
+        this.controllerAC.setTimerOff(offTime);
     }//GEN-LAST:event_submitAcTimeButtonActionPerformed
 
     private void blindButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blindButtonActionPerformed
         // TODO add your handling code here:
-    	if(blindButton.getText().equals("OPEN")) { //if open do something here
-    		blindButton.setText("CLOSE");
-//    		blindButton.setText(mControl.);
+
+    	if(this.controllerBlinds.getStatus() == 1) {
+    		this.controllerBlinds.setStatus(0);
+    		blindIndicatorValueLabel.setText("On");
+    		blindButton.setText("Turn Off");
     	}else {
-    		blindButton.setText("OPEN"); //if close do something here
-    	}
-    }//GEN-LAST:event_blindButtonActionPerformed
+    		this.controllerBlinds.setStatus(1);
+    		blindIndicatorValueLabel.setText("Off");
+    		blindButton.setText("Turn On");
+    	}    }//GEN-LAST:event_blindButtonActionPerformed
 
     private void submitBlindTimeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBlindTimeButtonActionPerformed
-        // TODO add your handling code here:
+    	String onTime = this.blindOpenTimeText.getText();
+        String offTime = this.blindCloseTimeText.getText();
+        this.controllerBlinds.setTimerOn(onTime);
+        this.controllerBlinds.setTimerOff(offTime);
     }//GEN-LAST:event_submitBlindTimeButtonActionPerformed
 
     private void clearBlindTimeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearBlindTimeButtonActionPerformed
-        // TODO add your handling code here:
+    	this.blindOpenTimeText.setText("");
+        this.blindCloseTimeText.setText("");
     }//GEN-LAST:event_clearBlindTimeButtonActionPerformed
 
     private void submitLampTimeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitLampTimeButtonActionPerformed
-        // TODO add your handling code here:
+    	String onTime = this.turnOnLampTimeText.getText();
+        String offTime = this.turnOffLampTimeText.getText();
+        this.controllerLamps.setTimerOn(onTime);
+        this.controllerLamps.setTimerOff(offTime);
     }//GEN-LAST:event_submitLampTimeButtonActionPerformed
 
     private void clearLampTimeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearLampTimeButtonActionPerformed
-        // TODO add your handling code here:
+        this.turnOnLampTimeText.setText("");
+        this.turnOffLampTimeText.setText("");
     }//GEN-LAST:event_clearLampTimeButtonActionPerformed
 
     private void setTemperatureSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_setTemperatureSpinnerStateChanged
@@ -589,24 +673,31 @@ public class ViewerPanel extends javax.swing.JPanel {
 
     private void lampButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lampButtonActionPerformed
         // TODO add your handling code here:
-    	if(lampButton.getText().equals("ON")) { //if open do something here
-    		lampButton.setText("OFF");
-    		lampIndicatorValueLabel.setText("ON");
+    	if(this.controllerLamps.getStatus() == 1) {
+    		this.controllerLamps.setStatus(0);
+    		lampIndicatorValueLabel.setText("On");
+    		lampButton.setText("Turn Off");
     	}else {
-    		lampButton.setText("ON"); //if close do something here
-    		lampIndicatorValueLabel.setText("OFF");
+    		this.controllerLamps.setStatus(1);
+    		lampIndicatorValueLabel.setText("Off");
+    		lampButton.setText("Turn On");
     	}
-    }//GEN-LAST:event_lampButtonActionPerformed
+    }//GEN-LAST:event_OKTempButtonActionPerformed
+
 
     private void acButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acButtonActionPerformed
+
         // TODO add your handling code here:
-    	if(acButton.getText().equals("ON")) { //if open do something here
-    		acButton.setText("OFF");
-    		acIndicatorValueLabel.setText("ON");
+    	if(this.controllerAC.getStatus() == 1) {
+    		this.controllerAC.setStatus(0);
+    		acIndicatorValueLabel.setText("On");
+    		acButton.setText("Turn Off");
     	}else {
-    		acButton.setText("ON"); //if close do something here
-    		acIndicatorValueLabel.setText("OFF");
+    		this.controllerAC.setStatus(1);
+    		acIndicatorValueLabel.setText("Off");
+    		acButton.setText("Turn On");
     	}
+    	
     }//GEN-LAST:event_acButtonActionPerformed
 
     
@@ -660,5 +751,9 @@ public class ViewerPanel extends javax.swing.JPanel {
     private javax.swing.JTextField turnOnLampTimeText;
     private javax.swing.JLabel windOutsideValueLabel;
     private javax.swing.JLabel windPressureLabel;
+    
+    private Sensor thermo = new Thermometer();
+    private Sensor baro = new Barometer();
+    private mainController mControl = new mainController();
     // End of variables declaration//GEN-END:variables
 }
