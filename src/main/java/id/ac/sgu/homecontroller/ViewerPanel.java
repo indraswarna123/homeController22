@@ -94,7 +94,7 @@ public class ViewerPanel extends javax.swing.JPanel {
 
         imagePanel.setPreferredSize(new java.awt.Dimension(350, 250));
 
-        imageLabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\ryand\\oxygen\\eclipse-workspace\\homeController22\\Image\\Weather\\QuestionMark.png")); // NOI18N
+        imageLabel.setIcon(new javax.swing.ImageIcon("./Image/Weather/QuestionMark.png")); // NOI18N
 
         javax.swing.GroupLayout imagePanelLayout = new javax.swing.GroupLayout(imagePanel);
         imagePanel.setLayout(imagePanelLayout);
@@ -125,7 +125,7 @@ public class ViewerPanel extends javax.swing.JPanel {
         tempOutsideValueLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tempOutsideValueLabel.setText(".");
 
-        refreshButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\ryand\\oxygen\\eclipse-workspace\\homeController22\\Image\\Etc\\RefreshButton.png")); // NOI18N
+        refreshButton.setIcon(new javax.swing.ImageIcon("./Image/Etc/RefreshButton.png")); // NOI18N
         refreshButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 refreshButtonActionPerformed(evt);
