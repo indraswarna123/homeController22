@@ -7,6 +7,6 @@ public abstract class abstractActor implements Actor {
 		behaviour.action();
 	}
 	
-
+	
 	
 }
