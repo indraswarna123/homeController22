@@ -38,7 +38,7 @@ public class ViewerPanel extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-    	System.out.println(controllerAC.getStatus());
+
         imagePanel = new javax.swing.JPanel();
         imageLabel = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -56,6 +56,7 @@ public class ViewerPanel extends javax.swing.JPanel {
         lampIndicatorValueLabel = new javax.swing.JLabel();
         blindIndicatorLabel = new javax.swing.JLabel();
         blindIndicatorValueLabel = new javax.swing.JLabel();
+        timeLabel = new javax.swing.JLabel();
         roomTemperature = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         blindLabel = new javax.swing.JLabel();
@@ -88,10 +89,12 @@ public class ViewerPanel extends javax.swing.JPanel {
         lampButton = new javax.swing.JButton();
         acTurnOnLabel = new javax.swing.JLabel();
         acButton = new javax.swing.JButton();
+        autoSceneLabel = new javax.swing.JLabel();
+        deployAutoSceneButtoon = new javax.swing.JButton();
 
         imagePanel.setPreferredSize(new java.awt.Dimension(350, 250));
 
-        imageLabel.setIcon(new javax.swing.ImageIcon("./Image/Weather/QuestionMark.png")); // NOI18N
+        imageLabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\ryand\\oxygen\\eclipse-workspace\\homeController22\\Image\\Weather\\QuestionMark.png")); // NOI18N
 
         javax.swing.GroupLayout imagePanelLayout = new javax.swing.GroupLayout(imagePanel);
         imagePanel.setLayout(imagePanelLayout);
@@ -122,7 +125,7 @@ public class ViewerPanel extends javax.swing.JPanel {
         tempOutsideValueLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tempOutsideValueLabel.setText(".");
 
-        refreshButton.setIcon(new javax.swing.ImageIcon("./Image/Etc/RefreshButton.png")); // NOI18N
+        refreshButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\ryand\\oxygen\\eclipse-workspace\\homeController22\\Image\\Etc\\RefreshButton.png")); // NOI18N
         refreshButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 refreshButtonActionPerformed(evt);
@@ -135,11 +138,7 @@ public class ViewerPanel extends javax.swing.JPanel {
         acIndicatorLabel.setText("AC INDICATOR         :");
 
         acIndicatorValueLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        if(this.controllerAC.getStatus() == 1) {
-        	acIndicatorValueLabel.setText("On");
-		}else {
-			acIndicatorValueLabel.setText("Off");
-		}
+        acIndicatorValueLabel.setText(".");
 
         descriptionTopLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         descriptionTopLabel.setText("Description");
@@ -152,24 +151,18 @@ public class ViewerPanel extends javax.swing.JPanel {
         lampIndicatorLabel.setText("LAMP INDICATOR     :");
 
         lampIndicatorValueLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        if(this.controllerLamps.getStatus() == 1) {
-        	lampIndicatorValueLabel.setText("On");
-		}else {
-			lampIndicatorValueLabel.setText("Off");
-		}
+        lampIndicatorValueLabel.setText(".");
 
         blindIndicatorLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         blindIndicatorLabel.setText("BLIND INDICATOR    :");
 
         blindIndicatorValueLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        
-        if(this.controllerBlinds.getStatus() == 1) {
-			blindIndicatorValueLabel.setText("On");
-		}else {
-			blindIndicatorValueLabel.setText("Off");
-		}
+        blindIndicatorValueLabel.setText(".");
 
-        roomTemperature.setFont(new java.awt.Font("Tahoma", 0, 40)); // NOI18N
+        timeLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        timeLabel.setText("00:00");
+
+        roomTemperature.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         roomTemperature.setText("0 C");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -194,8 +187,10 @@ public class ViewerPanel extends javax.swing.JPanel {
                             .addComponent(blindIndicatorValueLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lampIndicatorValueLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(acIndicatorValueLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(roomTemperature, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(timeLabel)
+                            .addComponent(roomTemperature, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -220,7 +215,7 @@ public class ViewerPanel extends javax.swing.JPanel {
                         .addComponent(tempOutsideLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(tempOutsideValueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(flagLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(descriptionTopLabel)
@@ -235,16 +230,15 @@ public class ViewerPanel extends javax.swing.JPanel {
                             .addComponent(windPressureLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(windOutsideValueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(acIndicatorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(acIndicatorValueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lampIndicatorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lampIndicatorValueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(roomTemperature, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(acIndicatorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(acIndicatorValueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(roomTemperature))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lampIndicatorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lampIndicatorValueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(timeLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(blindIndicatorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -266,7 +260,7 @@ public class ViewerPanel extends javax.swing.JPanel {
         });
 
         blindButton.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        blindButton.setText("Turn On");
+        blindButton.setText("OPEN");
         blindButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 blindButtonActionPerformed(evt);
@@ -394,6 +388,17 @@ public class ViewerPanel extends javax.swing.JPanel {
             }
         });
 
+        autoSceneLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        autoSceneLabel.setText("Automatic Scenario   :");
+
+        deployAutoSceneButtoon.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        deployAutoSceneButtoon.setText("DEPLOY");
+        deployAutoSceneButtoon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deployAutoSceneButtoonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -436,9 +441,15 @@ public class ViewerPanel extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(submitBlindTimeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(setActiveTimeOffLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(turnOffAcTimeText, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(setActiveTimeOffLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(turnOffAcTimeText, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(autoSceneLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(deployAutoSceneButtoon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                 .addGap(18, 18, 18)
                                 .addComponent(clearACTimeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -500,9 +511,15 @@ public class ViewerPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lampTurnOnLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lampButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lampTurnOnLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lampButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(autoSceneLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(deployAutoSceneButtoon, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(acTurnOnLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -546,7 +563,7 @@ public class ViewerPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(imagePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE))
+                    .addComponent(imagePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -668,10 +685,10 @@ public class ViewerPanel extends javax.swing.JPanel {
 
     private void OKTempButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OKTempButtonActionPerformed
         // TODO add your handling code here:
-    	roomTemperature.setText(setTemperatureSpinner.getValue()+" C ");
+    	timeLabel.setText(setTemperatureSpinner.getValue()+" C ");
     }//GEN-LAST:event_OKTempButtonActionPerformed
 
-    private void lampButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lampButtonActionPerformed
+    private void lampButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
         // TODO add your handling code here:
     	if(this.controllerLamps.getStatus() == 1) {
     		this.controllerLamps.setStatus(0);
@@ -682,7 +699,7 @@ public class ViewerPanel extends javax.swing.JPanel {
     		lampIndicatorValueLabel.setText("Off");
     		lampButton.setText("Turn On");
     	}
-    }//GEN-LAST:event_OKTempButtonActionPerformed
+    }                                            
 
 
     private void acButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acButtonActionPerformed
@@ -700,6 +717,10 @@ public class ViewerPanel extends javax.swing.JPanel {
     	
     }//GEN-LAST:event_acButtonActionPerformed
 
+    private void deployAutoSceneButtoonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deployAutoSceneButtoonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deployAutoSceneButtoonActionPerformed
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton OKTempButton;
@@ -707,6 +728,7 @@ public class ViewerPanel extends javax.swing.JPanel {
     private javax.swing.JLabel acIndicatorLabel;
     private javax.swing.JLabel acIndicatorValueLabel;
     private javax.swing.JLabel acTurnOnLabel;
+    private javax.swing.JLabel autoSceneLabel;
     private javax.swing.JButton blindButton;
     private javax.swing.JTextField blindCloseTimeText;
     private javax.swing.JLabel blindIndicatorLabel;
@@ -716,6 +738,7 @@ public class ViewerPanel extends javax.swing.JPanel {
     private javax.swing.JButton clearACTimeButton;
     private javax.swing.JButton clearBlindTimeButton;
     private javax.swing.JButton clearLampTimeButton;
+    private javax.swing.JButton deployAutoSceneButtoon;
     private javax.swing.JLabel descriptionBodyLabel;
     private javax.swing.JLabel descriptionTopLabel;
     private javax.swing.JLabel flagLabel;
@@ -743,6 +766,7 @@ public class ViewerPanel extends javax.swing.JPanel {
     private javax.swing.JButton submitLampTimerButton;
     private javax.swing.JLabel tempOutsideLabel;
     private javax.swing.JLabel tempOutsideValueLabel;
+    private javax.swing.JLabel timeLabel;
     private javax.swing.JTextField turnOffAcTimeText;
     private javax.swing.JLabel turnOffLampTimeLabel1;
     private javax.swing.JTextField turnOffLampTimeText;
@@ -755,5 +779,9 @@ public class ViewerPanel extends javax.swing.JPanel {
     private Sensor thermo = new Thermometer();
     private Sensor baro = new Barometer();
     private mainController mControl = new mainController();
+    
+//    private Sensor thermo = new Thermometer();
+//    private Sensor baro = new Barometer();
+//    private mainController mControl = new mainController();
     // End of variables declaration//GEN-END:variables
 }
