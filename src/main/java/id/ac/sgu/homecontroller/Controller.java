@@ -2,10 +2,13 @@ package id.ac.sgu.homecontroller;
 import java.time.LocalTime;
 import java.util.*;
 
+import java.io.IOException;
+
 public class Controller {
 	
-	public static void main(String[] args) {
-		
+
+	public static void main(String[] args) throws IOException {
+
 		Behaviour ACBehaviour = new BlowingWind();
 		Behaviour BlindsBehaviour = new BlindsSound();
 		Behaviour LampBehaviour = new LampSound();
@@ -48,10 +51,12 @@ public class Controller {
 		    public void run(){
 		      try {
 		          while(true){
-		        	 
-		        	 time.setTime(timeList.get(rand.nextInt(timeList.size())));
-		        	 temperature.setTemperature(temp[rand.nextInt(temp.length)]);
-//		        	 System.out.println(timeList.get(rand.nextInt(timeList.size())));
+		        	 LocalTime temporaryTime = timeList.get(rand.nextInt(timeList.size()));
+		        	 time.setTime(temporaryTime);
+		        	 int temporaryTemp = temp[rand.nextInt(temp.length)];
+		        	 temperature.setTemperature(temporaryTemp);
+		        	 System.out.println("Current Time : "+temporaryTime);
+		        	 System.out.println("Current Temperature : "+temporaryTemp);
 		             // Let the thread sleep for a while.
 		             Thread.sleep(10000);
 		          }
@@ -74,4 +79,6 @@ public class Controller {
 //		ug.frameInit();
 
 	}
+	
+	//public void getValueFrom
 }

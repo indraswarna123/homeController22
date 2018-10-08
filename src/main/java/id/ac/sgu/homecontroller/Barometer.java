@@ -8,6 +8,7 @@ public class Barometer extends Sensor{
 	
 	public double doubledValue() {
 		refresh();
+		System.out.println("Consition : "+fio.getCurrently());
 		System.out.println("Pressure Outside : "+rf.pressure);
 		return 0;
 	}
