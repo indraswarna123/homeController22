@@ -175,17 +175,18 @@ public class ViewerPanel extends javax.swing.JPanel {
                         .addComponent(roomTemperature, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(refreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(50, 50, 50)
-                        .addComponent(descriptionBodyLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(flagLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(128, 128, 128)
-                        .addComponent(descriptionTopLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(refreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(50, 50, 50)
+                                .addComponent(descriptionBodyLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(128, 128, 128)
+                                .addComponent(descriptionTopLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
@@ -531,7 +532,7 @@ public class ViewerPanel extends javax.swing.JPanel {
 
     private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
         // TODO add your handling code here:
-    	String path = "C:\\Users\\ryand\\oxygen\\eclipse-workspace\\homeController22\\Image\\Weather\\";
+    	String path = "./Image/Weather/";
     	path +=mControl.returnImage(thermo.getSummary());
     	System.out.println(path);
     	imageLabel.setIcon(new javax.swing.ImageIcon(path)); // NOI18N
@@ -555,6 +556,7 @@ public class ViewerPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     	if(blindButton.getText().equals("OPEN")) { //if open do something here
     		blindButton.setText("CLOSE");
+//    		blindButton.setText(mControl.);
     	}else {
     		blindButton.setText("OPEN"); //if close do something here
     	}
@@ -582,14 +584,29 @@ public class ViewerPanel extends javax.swing.JPanel {
 
     private void OKTempButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OKTempButtonActionPerformed
         // TODO add your handling code here:
+    	roomTemperature.setText(setTemperatureSpinner.getValue()+" C ");
     }//GEN-LAST:event_OKTempButtonActionPerformed
 
     private void lampButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lampButtonActionPerformed
         // TODO add your handling code here:
+    	if(lampButton.getText().equals("ON")) { //if open do something here
+    		lampButton.setText("OFF");
+    		lampIndicatorValueLabel.setText("ON");
+    	}else {
+    		lampButton.setText("ON"); //if close do something here
+    		lampIndicatorValueLabel.setText("OFF");
+    	}
     }//GEN-LAST:event_lampButtonActionPerformed
 
     private void acButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acButtonActionPerformed
         // TODO add your handling code here:
+    	if(acButton.getText().equals("ON")) { //if open do something here
+    		acButton.setText("OFF");
+    		acIndicatorValueLabel.setText("ON");
+    	}else {
+    		acButton.setText("ON"); //if close do something here
+    		acIndicatorValueLabel.setText("OFF");
+    	}
     }//GEN-LAST:event_acButtonActionPerformed
 
     
@@ -643,8 +660,5 @@ public class ViewerPanel extends javax.swing.JPanel {
     private javax.swing.JTextField turnOnLampTimeText;
     private javax.swing.JLabel windOutsideValueLabel;
     private javax.swing.JLabel windPressureLabel;
-    private Sensor thermo = new Thermometer();
-    private Sensor baro = new Barometer();
-    private mainController mControl = new mainController();
     // End of variables declaration//GEN-END:variables
 }

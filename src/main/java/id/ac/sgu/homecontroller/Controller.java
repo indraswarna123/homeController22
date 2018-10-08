@@ -78,14 +78,9 @@ public class Controller {
 		  };
 		
 		thread.start();
-		
+//		
 		 
-		
-
-
-		ViewerGUIPanel vgp = new ViewerGUIPanel();
-		
-		vgp.setTempOutDouble(0);
+	
 		
 		UserGUI ug = new UserGUI();
 		ug.frameInit();

@@ -42,7 +42,7 @@ public abstract class Sensor {
 	
 	RealFeel rf;
 	
-	ViewerGUIPanel vgp = new ViewerGUIPanel();
+	
 	
 	public void refresh() {
 		fio.setUnits(ForecastIO.UNITS_SI);
@@ -50,8 +50,6 @@ public abstract class Sensor {
 		System.out.println("inside Sensor Temperature :  "+fio.getCurrently());
 		String parse = fio.getCurrently()+"";
 		this.rf = gson.fromJson(parse, RealFeel.class);
-		vgp.setTempOutDouble(rf.temperature);
-		vgp.setWindPressureDouble(rf.pressure);
 		
 	}
 	
