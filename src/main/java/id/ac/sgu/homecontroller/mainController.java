@@ -137,6 +137,25 @@ class ACTimeObserver implements Observer {
 			this.controller.setStatus(0);
 		}
 		
+		if(((LocalTime) temp).isAfter(parsedTime12) && ((LocalTime) temp).isBefore(parsedTime24)){
+			if(((LocalTime) temp).isAfter(parsedTimeOn)) {
+				this.controller.actor.setStatus(1);
+				this.controller.actor.turnOn();
+				
+			}else {
+				this.controller.actor.setStatus(0);
+				this.controller.actor.turnOff();
+			}
+		}else if(((LocalTime) temp).isAfter(parsedTime00) && ((LocalTime) temp).isBefore(parsedTime12)){
+			if(((LocalTime) temp).isAfter(parsedTimeOff)) {
+				this.controller.actor.setStatus(0);
+				this.controller.actor.turnOff();
+			}else {
+				this.controller.actor.setStatus(1);
+				this.controller.actor.turnOn();
+			}
+		}
+		
 		
 	}
 	

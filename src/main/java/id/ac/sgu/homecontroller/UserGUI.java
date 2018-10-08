@@ -19,10 +19,9 @@ import javax.swing.JTextField;
 
 public class UserGUI {
 	
-	JPanel panel = new ViewerPanel();
 	ImageIcon iconWeather;
 	
-	public void frameInit() throws IOException {
+	public void frameInit(JPanel panel) throws IOException {
 		//create the frame
 		JFrame frame = new JFrame("JABLAY HomeCare");
 		//Optional what happen when the frame closed?
