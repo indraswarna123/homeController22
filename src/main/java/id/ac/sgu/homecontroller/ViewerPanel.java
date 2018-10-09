@@ -581,6 +581,15 @@ public class ViewerPanel extends javax.swing.JPanel {
     	imageLabel.setIcon(new javax.swing.ImageIcon(path)); // NOI18N
     	tempOutsideValueLabel.setText(thermo.doubledValue()+" C");
     	windOutsideValueLabel.setText(baro.doubledValue()+" KPH");
+    	
+    	String desc = "";
+    	desc += "Cloud Cover : "+thermo.rf.cloudCover+" %\n ";
+    	desc += "Humidity 	 : "+thermo.rf.humidity+"\n ";
+    	desc += "Uv Index	 : "+thermo.rf.uvIndex+"\n ";
+    	desc += "Ozone		 : "+thermo.rf.ozone+"\n ";
+    	System.out.println(desc);
+    	descriptionBodyLabel.setText(desc);
+    	desc = "";
     }//GEN-LAST:event_refreshButtonActionPerformed
 
     private void submitLampTimerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitLampTimerButtonActionPerformed
