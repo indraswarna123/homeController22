@@ -583,7 +583,7 @@ public class ViewerPanel extends javax.swing.JPanel {
     	windOutsideValueLabel.setText(baro.doubledValue()+" KPH");
     	
     	String desc = "";
-    	desc += "Cloud Cover : "+thermo.rf.cloudCover+" %\n ";
+    	desc += "Cloud Cover : "+thermo.rf.cloudCover+" \n ";
     	desc += "Humidity 	 : "+thermo.rf.humidity+"\n ";
     	desc += "Uv Index	 : "+thermo.rf.uvIndex+"\n ";
     	desc += "Ozone		 : "+thermo.rf.ozone+"\n ";
