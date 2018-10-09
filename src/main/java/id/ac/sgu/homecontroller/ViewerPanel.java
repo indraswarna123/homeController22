@@ -713,7 +713,7 @@ public class ViewerPanel extends javax.swing.JPanel {
 		ArrayList<LocalTime> timeList = new ArrayList<LocalTime>();
 		timeList.add(parser.parser("07:00"));
 		timeList.add(parser.parser("19:59"));
-		
+		int stopper = 0;
 		Thread thread = new Thread(){
 		    public void run(){
 		      try {
@@ -762,8 +762,11 @@ public class ViewerPanel extends javax.swing.JPanel {
 		       }
 		    }
 		  };
-		
 		thread.start();
+			
+			
+		
+		
     }//GEN-LAST:event_deployAutoSceneButtoonActionPerformed
 
     
